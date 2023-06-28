@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>Greeting based on time and day</title>
+  <style>
+    .morning {
+      color: green;
+    }
+    .afternoon {
+      color: blue;
+    }
+    .evening {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Greeting based on time and day</h1>
+  <button onclick="showGreeting()">Click me</button>
+  <p id="greeting"></p>
+  <p id="planet"></p>
+
+  <script>
+    function showGreeting() {
+      var now = new Date();
+      var hour = now.getHours();
+      console.log("Time is after " + hour + ":00 h");
+      var greeting = '';
+
+      if (hour >= 0 && hour < 12) {
+        greeting = 'Good morning!';
+        document.getElementById('greeting').className = 'morning';
+      } else if (hour >= 12 && hour < 18) {
+        greeting = 'Good afternoon!';
+        document.getElementById('greeting').className = 'afternoon';
+      } else {
+        greeting = 'Good evening!';
+        document.getElementById('greeting').className = 'evening';
+      }
+
+      document.getElementById('greeting').textContent = greeting;
+
+      var day = now.getDay();
+      var planet = '';
+
+      switch (day) {
+        case 0:
+          planet = 'Sunday';
+          break;
+        case 1:
+          planet = 'Monday';
+          break;
+        case 2:
+          planet = 'Tuesday';
+          break;
+        case 3:
+          planet = 'Wednesday';
+          break;
+        case 4:
+          planet = 'Thursday';
+          break;
+        case 5:
+          planet = 'Friday';
+          break;
+        case 6:
+          planet = 'Saturday';
+          break;
+        default:
+          planet = 'Unknown';
+      }
+
+      var explanation = "Today is " + planet + ", which is associated with the planet " + getPlanetName(planet) + ".";
+
+      document.getElementById('planet').textContent = explanation;
+    }
+
+    function getPlanetName(day) {
+      var planetName = '';
+      switch (day) {
+        case 'Sunday':
+          planetName = 'Sun';
+          break;
+        case 'Monday':
+          planetName = 'Moon';
+          break;
+        case 'Tuesday':
+          planetName = 'Mars';
+          break;
+        case 'Wednesday':
+          planetName = 'Mercury';
+          break;
+        case 'Thursday':
+          planetName = 'Jupiter';
+          break;
+        case 'Friday':
+          planetName = 'Venus';
+          break;
+        case 'Saturday':
+          planetName = 'Saturn';
+          break;
+        default:
+          planetName = 'Unknown';
+      }
+      return planetName;
+    }
+  </script>
+</body>
+</html>
