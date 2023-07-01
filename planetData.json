@@ -1,0 +1,37 @@
+[
+  {
+    "planet": "Sun",
+    "imageSource": "https://example.com/sun.jpg",
+    "explanation": "The Sun represents vitality and energy. It is the center of our solar system."
+  },
+  {
+    "planet": "Moon",
+    "imageSource": "https://example.com/moon.jpg",
+    "explanation": "The Moon symbolizes emotions and intuition. It has a significant influence on tides."
+  },
+  {
+    "planet": "Mars",
+    "imageSource": "https://example.com/mars.jpg",
+    "explanation": "Mars embodies passion and determination. It is often called the 'Red Planet'."
+  },
+  {
+    "planet": "Mercury",
+    "imageSource": "https://example.com/mercury.jpg",
+    "explanation": "Mercury represents communication and intellect. It is the closest planet to the Sun."
+  },
+  {
+    "planet": "Jupiter",
+    "imageSource": "https://example.com/jupiter.jpg",
+    "explanation": "Jupiter symbolizes expansion and abundance. It is the largest planet in our solar system."
+  },
+  {
+    "planet": "Venus",
+    "imageSource": "https://example.com/venus.jpg",
+    "explanation": "Venus embodies love and beauty. It is often referred to as the 'Evening Star'."
+  },
+  {
+    "planet": "Saturn",
+    "imageSource": "https://example.com/saturn.jpg",
+    "explanation": "Saturn represents discipline and responsibility. It is known for its iconic rings."
+  }
+]
