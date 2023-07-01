@@ -1,0 +1,104 @@
+<html>
+<head>
+  <title>Greeting based on time and day</title>
+  <style>
+    .morning {
+      color: green;
+    }
+    .afternoon {
+      color: blue;
+    }
+    .evening {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Greeting based on time and day</h1>
+  <button onclick="showGreeting()">Click me</button>
+  <p id="greeting"></p>
+  <p id="planet"></p>
+  <img id="planetImage" src="" alt="Planet Image">
+
+  <script>
+    function showGreeting() {
+      var now = new Date();
+      var hour = now.getHours();
+      console.log("Time is after " + hour + ":00 h");
+      var greeting = '';
+
+      if (hour >= 0 && hour < 12) {
+        greeting = 'Good morning!';
+        document.getElementById('greeting').className = 'morning';
+      } else if (hour >= 12 && hour < 18) {
+        greeting = 'Good afternoon!';
+        document.getElementById('greeting').className = 'afternoon';
+      } else {
+        greeting = 'Good evening!';
+        document.getElementById('greeting').className = 'evening';
+      }
+
+      document.getElementById('greeting').textContent = greeting;
+
+      var day = now.getDay();
+      var planetInfo = getPlanetInfo(day);
+
+      displayPlanet(planetInfo.imageSource, planetInfo.explanation);
+
+      var explanation = "Today is " + getDayOfWeek(day) + ", which is associated with the planet " + planetInfo.planet + ".";
+      document.getElementById('planet').textContent = explanation;
+    }
+
+    function getPlanetInfo(day) {
+      var planetMap = new Map();
+      planetMap.set(0, {
+        planet: 'Sun',
+        imageSource: 'https://example.com/sun.jpg',
+        explanation: 'The Sun represents vitality and energy. It is the center of our solar system.'
+      });
+      planetMap.set(1, {
+        planet: 'Moon',
+        imageSource: 'https://example.com/moon.jpg',
+        explanation: 'The Moon symbolizes emotions and intuition. It has a significant influence on tides.'
+      });
+      planetMap.set(2, {
+        planet: 'Mars',
+        imageSource: 'https://example.com/mars.jpg',
+        explanation: 'Mars embodies passion and determination. It is often called the "Red Planet".'
+      });
+      planetMap.set(3, {
+        planet: 'Mercury',
+        imageSource: 'https://example.com/mercury.jpg',
+        explanation: 'Mercury represents communication and intellect. It is the closest planet to the Sun.'
+      });
+      planetMap.set(4, {
+        planet: 'Jupiter',
+        imageSource: 'https://example.com/jupiter.jpg',
+        explanation: 'Jupiter symbolizes expansion and abundance. It is the largest planet in our solar system.'
+      });
+      planetMap.set(5, {
+        planet: 'Venus',
+        imageSource: 'https://example.com/venus.jpg',
+        explanation: 'Venus embodies love and beauty. It is often referred to as the "Evening Star".'
+      });
+      planetMap.set(6, {
+        planet: 'Saturn',
+        imageSource: 'https://example.com/saturn.jpg',
+        explanation: 'Saturn represents discipline and responsibility. It is known for its iconic rings.'
+      });
+
+      return planetMap.get(day) || { planet: 'Unknown', imageSource: '', explanation: 'The association with an unknown planet.' };
+}
+function displayPlanet(imageSource, planetExplanation) {
+  document.getElementById('planetImage').src = imageSource;
+  document.getElementById('planetImage').alt = "Planet Image";
+  document.getElementById('planet').textContent = planetExplanation;
+}
+
+function getDayOfWeek(day) {
+  var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return daysOfWeek[day];
+}
+</script>
+</body>
+</html>
