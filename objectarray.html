@@ -1,0 +1,125 @@
+<html>
+<head>
+  <title>Greeting based on time and day</title>
+  <style>
+    .morning {
+      color: green;
+    }
+    .afternoon {
+      color: blue;
+    }
+    .evening {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Greeting based on time and day</h1>
+  <button onclick="showGreeting()">Click me</button>
+  <p id="greeting"></p>
+  <p id="planet"></p>
+  <img id="planetImage" src="" alt="Planet Image">
+
+  <script>
+    // Array of objects containing planet information
+    var planetData = [
+      {
+        day: 'Sunday',
+        planet: 'Sun',
+        imageSource: 'https://example.com/sun.jpg',
+        explanation: 'The Sun represents vitality and energy. It is the center of our solar system.'
+      },
+      {
+        day: 'Monday',
+        planet: 'Moon',
+        imageSource: 'https://example.com/moon.jpg',
+        explanation: 'The Moon symbolizes emotions and intuition. It has a significant influence on tides.'
+      },
+      {
+        day: 'Tuesday',
+        planet: 'Mars',
+        imageSource: 'https://example.com/mars.jpg',
+        explanation: 'Mars embodies passion and determination. It is often called the "Red Planet".'
+      },
+      {
+        day: 'Wednesday',
+        planet: 'Mercury',
+        imageSource: 'https://example.com/mercury.jpg',
+        explanation: 'Mercury represents communication and intellect. It is the closest planet to the Sun.'
+      },
+      {
+        day: 'Thursday',
+        planet: 'Jupiter',
+        imageSource: 'https://example.com/jupiter.jpg',
+        explanation: 'Jupiter symbolizes expansion and abundance. It is the largest planet in our solar system.'
+      },
+      {
+        day: 'Friday',
+        planet: 'Venus',
+        imageSource: 'https://example.com/venus.jpg',
+        explanation: 'Venus embodies love and beauty. It is often referred to as the "Evening Star".'
+      },
+      {
+        day: 'Saturday',
+        planet: 'Saturn',
+        imageSource: 'https://example.com/saturn.jpg',
+        explanation: 'Saturn represents discipline and responsibility. It is known for its iconic rings.'
+      }
+    ];
+
+    function showGreeting() {
+      var now = new Date();
+      var hour = now.getHours();
+      console.log("Time is after " + hour + ":00 h");
+      var greeting = '';
+
+      if (hour >= 0 && hour < 12) {
+        greeting = 'Good morning!';
+        document.getElementById('greeting').className = 'morning';
+      } else if (hour >= 12 && hour < 18) {
+        greeting = 'Good afternoon!';
+        document.getElementById('greeting').className = 'afternoon';
+      } else {
+        greeting = 'Good evening!';
+        document.getElementById('greeting').className = 'evening';
+      }
+
+      document.getElementById('greeting').textContent = greeting;
+
+      var day = now.getDay();
+      var planet = '';
+      var imageSource = '';
+      var planetExplanation = '';
+
+      // Find the planet data object based on the current day of the week
+      var planetInfo = planetData.find(function(data) {
+        return data.day === getDayOfWeek(day);
+      });
+
+      if (planetInfo) {
+        planet = planetInfo.planet;
+        imageSource= planetInfo.imageSource;
+planetExplanation = planetInfo.explanation;
+} else {
+planet = 'Unknown';
+planetExplanation = 'The association with an unknown planet.';
+}
+  displayPlanet(imageSource, planetExplanation);
+
+  var explanation = "Today is " + getDayOfWeek(day) + ", which is associated with the planet " + planet + ".";
+  document.getElementById('planet').textContent = explanation;
+}
+
+function displayPlanet(imageSource, planetExplanation) {
+  document.getElementById('planetImage').src = imageSource;
+  document.getElementById('planetImage').alt = "Planet Image";
+  document.getElementById('planet').textContent = planetExplanation;
+}
+
+function getDayOfWeek(day) {
+  var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return daysOfWeek[day];
+}
+</script>
+</body>
+</html>
