@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Element Selection Demo</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>Element Selection Demo</h1>
+  
+  <table id="exampleTable">
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+    </tr>
+    <tr>
+      <td>Row 1, Cell 1</td>
+      <td>Row 1, Cell 2</td>
+    </tr>
+    <tr>
+      <td>Row 2, Cell 1</td>
+      <td>Row 2, Cell 2</td>
+    </tr>
+    <tr>
+      <td>Row 3, Cell 1</td>
+      <td>Row 3, Cell 2</td>
+    </tr>
+  </table>
+  
+  <div id="selectedElements">
+    <h2>Selected Elements</h2>
+    <ul></ul>
+    <div id="noElementsFoundMessage" style="display: none; color: red;">No elements found with the provided selector.</div>
+  </div>
+  
+  <div>
+    <label for="selectorInput">Enter CSS Selector:</label>
+    <input type="text" id="selectorInput" placeholder="e.g., #exampleTable, td">
+    <button onclick="selectElementsBySelector()">Select Elements</button>
+  </div>
+  
+  <button onclick="highlightById()" title="Highlight the element with ID 'exampleTable'">Highlight by ID</button>
+  <button onclick="highlightByTag()" title="Highlight all 'td' elements within the table">Highlight by Tag</button>
+  <button onclick="highlightAllByQuery()" title="Highlight all table rows using 'querySelectorAll'">Highlight All Rows</button>
+  <button onclick="clearHighlights()" title="Remove all highlights from selected elements">Clear Highlights</button>
+  
+  <script>
+    function highlightById() {
+      var element = document.getElementById('exampleTable');
+      element.classList.add('highlight');
+      displaySelectedElement("Table with ID 'exampleTable'");
+    }
+    
+    function highlightByTag() {
+      var elements = document.getElementsByTagName('td');
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add('highlight');
+      }
+      displaySelectedElement("All 'td' elements within the table");
+    }
+    
+    function highlightAllByQuery() {
+      var elements = document.querySelectorAll('#exampleTable tr');
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add('highlight');
+      }
+      displaySelectedElement("All table rows using 'querySelectorAll'");
+    }
+    
+    function clearHighlights() {
+      var highlightedElements = document.querySelectorAll('.highlight');
+      for (var i = 0; i < highlightedElements.length; i++) {
+        highlightedElements[i].classList.remove('highlight');
+      }
+      clearSelectedElements();
+    }
+    
+    function displaySelectedElement(description) {
+      var selectedElementsList = document.querySelector('#selectedElements ul');
+      var listItem = document.createElement('li');
+      listItem.textContent = description;
+      selectedElementsList.appendChild(listItem);
+    }
+    
+    function clearSelectedElements() {
+      var selectedElementsList = document.querySelector('#selectedElements ul');
+      selectedElementsList.innerHTML = '';
+      hideNoElements();
+}
+
+function hideNoElements() {
+  var noElementsMessage = document.getElementById('noElementsFoundMessage');
+  noElementsMessage.style.display = 'none';
+}
+
+function showNoElements() {
+  var noElementsMessage = document.getElementById('noElementsFoundMessage');
+  noElementsMessage.style.display = 'block';
+}
+
+function selectElementsBySelector() {
+  var selectorInput = document.getElementById('selectorInput');
+  var selector = selectorInput.value.trim();
+
+  clearHighlights();
+  clearSelectedElements();
+  hideNoElements();
+
+  try {
+    var elements = document.querySelectorAll(selector);
+    if (elements.length > 0) {
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add('highlight');
+      }
+      displaySelectedElement("Selected elements using the selector: " + selector);
+    } else {
+      showNoElements();
+    }
+  } catch (error) {
+    console.log("Invalid selector: " + selector);
+  }
+}
+  </script>
+</body>
+</html>
